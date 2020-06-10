@@ -1,0 +1,9 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: contentServer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:8001/eureka/

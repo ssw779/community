@@ -1,0 +1,34 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: goodsServer
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community
+    username: root
+    password: ok
+  redis:
+    host: 127.0.0.1
+    password: ok
+    port: 6379
+#    zipkin
+  sleuth:
+    sampler:
+      percentage: 1.0
+  zipkin:
+    base-url: http://localhost:8004
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:8001/eureka/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+feign:
+  hystrix:
+    enabled: true
+
+logging:
+  level:
+    com.zb.mapper: debug
