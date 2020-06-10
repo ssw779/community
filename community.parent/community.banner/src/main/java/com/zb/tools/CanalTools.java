@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Component
 public class CanalTools {
-
+//添加
     public void execution() {
         // 创建链接
         CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(),
