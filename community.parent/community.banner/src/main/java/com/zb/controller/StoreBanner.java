@@ -22,7 +22,7 @@ import java.util.List;
 public class StoreBanner {
     @Autowired
     private RestTemplate restTemplate;
-
+//gg
 
     /**
      * 查询轮询广告，通过lua多级缓存
