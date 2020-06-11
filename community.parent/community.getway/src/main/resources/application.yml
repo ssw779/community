@@ -19,6 +19,7 @@ zuul:
     myGoodsServer: #自定义的别名
       path: /goods/**  #映射的url路径 #http://localhost:8003/community/showUser?id=1
       serviceId: goodsServer #具体的微服务的名称
+
 #    myorderserver:
 #      path: /order/**
 #      serviceId: order-consumer  #模拟多个微服务模块的配置

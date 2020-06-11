@@ -10,13 +10,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.InetSocketAddress;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class CanalTools {
-//添加
+    //添加
     public void execution() {
         // 创建链接
         CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(),
@@ -82,7 +80,15 @@ public class CanalTools {
                 } else if (eventType == EventType.INSERT) {
                     printColumn(rowData.getAfterColumnsList());
                 } else {
-                    updateRedisData(rowData.getAfterColumnsList());
+                    //是这个表“tb_content”才能执行
+                    if (entry.getHeader().getTableName().equals("tb_content")) {
+                        updateRedisData(rowData.getAfterColumnsList());
+                    }
+                    if (entry.getHeader().getTableName().equals("store")) {
+
+                        updateRecommendRedisData(rowData.getAfterColumnsList());
+                    }
+
                 }
             }
         }
@@ -93,9 +99,9 @@ public class CanalTools {
 
     private void updateRedisData(List<Column> columns) {
         Set<Integer> categoryId = new HashSet<>();
+
         for (Column column : columns) {
             System.out.println(column.getName() + " : " + column.getValue() + "  update=" + column.getUpdated());
-
             if (column.getName().equals("category_id")) {
                 categoryId.add(Integer.parseInt(column.getValue()));
             }
@@ -106,7 +112,36 @@ public class CanalTools {
                 System.out.println("远程调用nginx中的接口程序:" + result);
             }
 
+
         }
+
+    }
+
+    /**
+     * 同步修改店铺信息 调用lua文件
+     *
+     * @param columns
+     */
+    public void updateRecommendRedisData(List<Column> columns) {
+        String[] arry = new String[2];
+
+        for (Column column : columns) {
+            System.out.println(column.getName() + " : " + column.getValue() + "  update=" + column.getUpdated());
+
+            if (column.getName().equals("storeType")) {
+                arry[0] = column.getValue();
+            }
+            if (column.getName().equals("shopParenType")) {
+
+                arry[1] = column.getValue();
+            }
+
+
+        }
+        System.out.println(arry[0] + "\t" + arry[1]);
+        String url = "http://localhost:9000/recUpdate?storeType=" + arry[0] + "&shopParenType=" + arry[1];
+        String result = restTemplate.getForObject(url, String.class);
+        System.out.println("远程调用nginx中的接口程序:" + result);
 
     }
 
