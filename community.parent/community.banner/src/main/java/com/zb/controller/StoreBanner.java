@@ -29,7 +29,7 @@ public class StoreBanner {
 
 
     /**
-     * 查询轮询广告，通过lua多级缓存
+     * 查询轮询广告，通过lua多级缓存 调用lua文件查询，修改用的是canal同步修改
      */
     @GetMapping(value = "/findStoreBanner/{id}")
     public Dto findStoreBanner(@PathVariable("id") Integer id) {
@@ -39,6 +39,12 @@ public class StoreBanner {
         return DtoUtil.returnSuccess("success", contentList);
     }
 
+    /**
+     * 查询推荐位店家及图片， 通过lua多级缓存 调用lua文件查询，修改用的是canal同步修改
+     * @param storeType 店铺类型1：普通店铺，2：家政店铺
+     * @param shopParenType 商品父级类型 1：餐饮2：饮料3..
+     * @return
+     */
     @GetMapping(value = "findStore/{storeType}/{shopParenType}")
     public Dto findStore(@PathVariable("storeType") Integer storeType, @PathVariable("shopParenType") Integer shopParenType) {
         String url = "http://localhost:9000/recReader?storeType=" + storeType+"&shopParenType="+shopParenType;
