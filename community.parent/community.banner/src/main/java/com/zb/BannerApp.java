@@ -21,6 +21,7 @@ public class BannerApp {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(BannerApp.class, args);
         CanalTools bean = run.getBean(CanalTools.class);
+        //修改数据库时修改redis里存储的数据
         bean.execution();
     }
 
