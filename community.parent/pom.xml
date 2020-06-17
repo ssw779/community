@@ -14,9 +14,10 @@
         <module>community.goods</module>
         <module>community.euerka</module>
         <module>community.getway</module>
-        <module>community.zipkin</module>
         <module>community.banner</module>
         <module>communtiy.banner.api</module>
+        <module>communtiy.order.api</module>
+        <module>communtiy.order</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

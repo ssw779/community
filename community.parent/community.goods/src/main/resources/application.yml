@@ -12,12 +12,8 @@ spring:
     host: 127.0.0.1
     password: ok
     port: 6379
-#    zipkin
-  sleuth:
-    sampler:
-      percentage: 1.0
-  zipkin:
-    base-url: http://localhost:8004
+
+
 eureka:
   client:
     service-url:

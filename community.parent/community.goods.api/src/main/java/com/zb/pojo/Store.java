@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author 孙硕威
  */
-public class Store implements Serializable {
+public class Store  {
     //编号
     private Integer id;
     //店铺名

@@ -3,11 +3,7 @@ server:
 spring:
   application:
     name: gateway-server
-  sleuth:
-    sampler:
-      percentage: 1.0
-  zipkin:
-    base-url: http://localhost:8004
+
 #发布到eureka
 eureka:
   client:
