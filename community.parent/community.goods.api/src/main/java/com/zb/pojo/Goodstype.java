@@ -4,7 +4,7 @@ import java.io.Serializable;
 /***
 *   
 */
-public class Goodstype implements Serializable {
+public class Goodstype  {
     //
     private Integer id;
     //

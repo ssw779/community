@@ -27,20 +27,20 @@ public interface GoodsMapper {
     /**
      * 商品的全部查询，按条件查询、分页查询
      *
-     * @param param
+     * @param goods
      * @return 商品的集合
      * @throws Exception
      */
-    public List<Goods> getGoodsListByMap(Map<String,Object>param) throws Exception;
+    public List<Goods> getGoodsList(Goods goods) throws Exception;
 
     /**
      * 查询分页数据count
      *
-     * @param param
+     * @param goods
      * @return 返回有几条分页数据 int
      * @throws Exception
      */
-    public Integer getGoodsCountByMap(Map<String,Object>param) throws Exception;
+    public Integer getGoodsCount(Goods goods) throws Exception;
 
     /**
      * 添加商品信息

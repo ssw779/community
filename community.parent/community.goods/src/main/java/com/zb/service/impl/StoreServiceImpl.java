@@ -60,4 +60,18 @@ public class StoreServiceImpl implements StoreService {
 
         return storeList;
     }
+
+    @Override
+    public Store getStoreById(Integer id) throws Exception {
+        Store store = storeMapper.getStoreById(id);
+        ImageVo imageVo = new ImageVo();
+        //图片位置2店铺首页
+        imageVo.setPostion(2);
+        //图片类型
+        imageVo.setType(1);
+        imageVo.setTargetId(store.getId());
+        List<Image> imageListByMap = imageMapper.getImageListByMap(imageVo);
+        store.setImgUrl(imageListByMap);
+        return store;
+    }
 }

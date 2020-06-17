@@ -16,7 +16,7 @@ public interface StoreMapper {
 	 * @return 一个商店信息
 	 * @throws Exception
 	 */
-	public Store getStoreById(@Param(value = "id") Long id)throws Exception;
+	public Store getStoreById(@Param(value = "id") Integer id)throws Exception;
 
 	/**
 	 * 多条件查找店铺信息，分页

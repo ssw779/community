@@ -54,5 +54,16 @@ public class StoreController {
         return null;
     }
 
+    @GetMapping(value = "/getStoreById/{id}")
+    public Dto getStoreById(@PathVariable("id") Integer id) {
+        try {
+            Store store = storeService.getStoreById(id);
+            return DtoUtil.returnSuccess("success",store);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }
