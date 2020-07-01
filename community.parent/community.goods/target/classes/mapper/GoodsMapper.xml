@@ -45,6 +45,7 @@
         goodsPrice as goodsPrice,
         isHotGoods as isHotGoods,
         repertory as repertory,
+        salesvolume as salesvolume,
         goodsType as goodsType,
         takesType as takesType,
         score as score,
@@ -114,7 +115,6 @@
             ORDER BY score desc
         </if>
         <if test="salesvolume!=null and salesvolume!=''">
-
             ORDER BY salesvolume desc
         </if>
         <if test="index != null and size != null ">

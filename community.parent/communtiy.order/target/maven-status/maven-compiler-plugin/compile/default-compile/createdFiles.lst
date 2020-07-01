@@ -1,0 +1,12 @@
+com\zb\mapper\OrdersMapper.class
+com\zb\config\AlipayConfig.class
+com\zb\OrderApp.class
+com\zb\config\RabbitMQConfig.class
+com\zb\service\impl\OrdersServiceImpl$1.class
+com\zb\controller\OrdersController.class
+com\zb\service\GoodsSalesVolumeService.class
+com\zb\service\impl\OrdersServiceImpl.class
+com\zb\service\OrdersService.class
+com\zb\service\impl\GoodsSalesVolumeServiceImpl.class
+com\zb\config\OrderDelayRabbitConfig.class
+com\zb\mapper\GoodsSalesVolumeMapper.class

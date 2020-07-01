@@ -5,15 +5,26 @@ import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.common.utils.AddressUtils;
 import com.alibaba.otter.canal.protocol.CanalEntry.*;
 import com.alibaba.otter.canal.protocol.Message;
+import org.elasticsearch.action.DocWriteResponse;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.*;
 
 @Component
 public class CanalTools {
+
+    @Autowired
+    private RestHighLevelClient client;
+
     //添加
     public void execution() {
         // 创建链接
@@ -79,14 +90,17 @@ public class CanalTools {
                     printColumn(rowData.getBeforeColumnsList());
                 } else if (eventType == EventType.INSERT) {
                     printColumn(rowData.getAfterColumnsList());
+                    addEsData(rowData.getAfterColumnsList());
                 } else {
                     //是这个表“tb_content”才能执行
                     if (entry.getHeader().getTableName().equals("tb_content")) {
                         updateRedisData(rowData.getAfterColumnsList());
                     }
                     if (entry.getHeader().getTableName().equals("store")) {
+                        //修改elsearch数据
+                        updateESData(rowData.getAfterColumnsList());
+                        //updateRecommendRedisData(rowData.getAfterColumnsList());
 
-                        updateRecommendRedisData(rowData.getAfterColumnsList());
                     }
 
                 }
@@ -142,6 +156,102 @@ public class CanalTools {
         String url = "http://localhost:9000/recUpdate?storeType=" + arry[0] + "&shopParenType=" + arry[1];
         String result = restTemplate.getForObject(url, String.class);
         System.out.println("远程调用nginx中的接口程序:" + result);
+
+    }
+
+    /**
+     * 修改elSearch中的数据
+     *
+     * @param columns
+     */
+    private void updateESData(List<Column> columns) {
+        System.out.println("同步修改数据");
+        try {
+            Map<String, Object> data = new HashMap<>();
+            String id = "";
+            for (Column column : columns) {
+                if (column.getName().equals("id")) {
+                    id = column.getValue();
+                    continue;
+                }
+                data.put(column.getName(), column.getValue());
+            }
+            UpdateRequest updateRequest = new UpdateRequest("my-communtiy", "doc", id);
+            updateRequest.doc(data);
+            UpdateResponse updateResponse = client.update(updateRequest);
+            DocWriteResponse.Result result = updateResponse.getResult();
+            System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 同步添加elSearch中的数据
+     * @param columns
+     */
+    public void addEsData(List<Column> columns) {
+        System.out.println(columns);
+        System.out.println("同步添加数据");
+
+        try {
+            Map<String, Object> data = new HashMap<>();
+            System.out.println(data);
+            Integer id = null;
+            String storeName = "";
+            String desc = "";
+            String rule = "";
+            Integer storeType = null;
+            String address = "";
+            Double score = 0.0;
+            String imgUrl = "";
+            for (Column column : columns) {
+                if (column.getName().equals("id")) {
+                    id = Integer.parseInt(column.getValue());
+
+                }
+                if (column.getName().equals("storeName")) {
+                    storeName = column.getValue();
+
+                }
+                if (column.getName().equals("desc")) {
+                    desc = column.getValue();
+
+                }
+                if (column.getName().equals("rule")) {
+                    rule = column.getValue();
+
+                }
+                if (column.getName().equals("storeType")) {
+                    storeType = Integer.parseInt(column.getValue());
+
+                }
+                if (column.getName().equals("address")) {
+                    address = column.getValue();
+
+                }
+                if (column.getName().equals("score")) {
+                    score = Double.parseDouble(column.getValue());
+
+                }
+                if (column.getName().equals("imgUrl")) {
+                    imgUrl = column.getValue();
+
+                }
+                data.put(column.getName(), column.getValue());
+
+            }
+            System.out.println(data);
+            IndexRequest indexRequest = new IndexRequest("my-communtiy", "doc", id+"");
+            //绑定数据
+            indexRequest.source(data);
+            //执行获取响应
+            IndexResponse indexResponse = client.index(indexRequest);
+            DocWriteResponse.Result responseResult = indexResponse.getResult();
+            System.out.println(responseResult);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

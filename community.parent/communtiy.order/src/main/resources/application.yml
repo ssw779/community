@@ -19,10 +19,10 @@ eureka:
       defaultZone: http://root:ok@localhost:8001/eureka/
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-
-feign:
-  hystrix:
-    enabled: true
+#
+#feign:
+#  hystrix:
+#    enabled: true
 
 logging:
   level:

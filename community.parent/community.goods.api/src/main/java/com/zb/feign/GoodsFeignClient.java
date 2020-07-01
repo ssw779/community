@@ -1,7 +1,6 @@
 package com.zb.feign;
 
-import com.zb.dto.Dto;
-import com.zb.feign.impl.FallBack;
+
 import com.zb.pojo.Goods;
 import com.zb.pojo.Goodstype;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(value = "goodsServer", fallback = FallBack.class)
+@FeignClient(value = "goodsServer")
 public interface GoodsFeignClient {
     @GetMapping(value = "/goods/findGoodsType")
     /**
@@ -25,4 +24,6 @@ public interface GoodsFeignClient {
 
     @PostMapping(value = "/goods/updateGoods")
     public int updateGoods(@RequestBody Goods goods);
+
+
 }

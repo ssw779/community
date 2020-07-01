@@ -23,6 +23,11 @@
             <artifactId>communtiy.banner.api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.zb</groupId>
+            <artifactId>community.common.api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>com.zb</groupId>
@@ -43,6 +48,19 @@
             <groupId>top.javatool</groupId>
             <artifactId>canal-client</artifactId>
             <version>1.2.1-RELEASE</version>
+        </dependency>
+
+
+        <!--elsearch-->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>6.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>6.2.1</version>
         </dependency>
     </dependencies>
 

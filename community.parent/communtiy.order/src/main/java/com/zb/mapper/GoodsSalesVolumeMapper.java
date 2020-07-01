@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+
+/**
+ * 计算商品销量
+ * @author 孙硕威
+ */
 public interface GoodsSalesVolumeMapper {
 
     public int insertGoodsSalesVolume(GoodsSalesVolume goodsSalesVolume);

@@ -16,5 +16,11 @@ public interface GoodsService {
      */
     public PageUtil<Goods> findAllGoodsByVo(Goods goods) throws Exception;
 
+    /**
+     * 修改商品
+     * @param goods
+     * @return
+     * @throws Exception
+     */
     public int updateGoods(Goods goods) throws Exception;
 }

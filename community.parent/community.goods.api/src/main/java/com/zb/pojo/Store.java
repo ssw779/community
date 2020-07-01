@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author 孙硕威
  */
-public class Store  {
+public class Store {
     //编号
     private Integer id;
     //店铺名
@@ -43,6 +43,8 @@ public class Store  {
     private String endTime;
     //图片地址
     private List<Image> imgUrl;
+    //单个图片地址
+    private String imgurl;
 
     //get set 方法
     public void setId(Integer id) {
@@ -171,5 +173,13 @@ public class Store  {
 
     public void setShopParenType(Integer shopParenType) {
         this.shopParenType = shopParenType;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
     }
 }
