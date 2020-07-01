@@ -25,7 +25,15 @@ public class GoodsController {
      * 分页查询商品信息
      * 1：本店热销 查询代纳普编号为1的热销商品{"isHotGoods":1,"index":1,"size":6,"storeId":1}
      * 2：本店新品 按时间排序查询新品{"index":1,"size":6,"putawayTime":1,"storeId":1}
-     * 3: 多条件查询商品信息，并且查询图片
+     * 3: 多条件查询商品信息，并且查询图片,可以按销量排序：{"salesvolume":1}
+     * 按评分排序{"putawayTime":1},按新品排序{"score":1},
+     * 按照价格区间，仅显示有货，和是否参与活动
+     * <p>
+     * {  endPrice: ""
+     * index: 1
+     * salesvolume: 1
+     * size: 12
+     * startPrice: "" }
      *
      * @param goods
      * @return

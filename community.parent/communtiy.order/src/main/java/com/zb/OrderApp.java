@@ -19,9 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class OrderApp {
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(OrderApp.class, args);
-       GoodsSalesVolumeServiceImpl bean = context.getBean(GoodsSalesVolumeServiceImpl.class);
+         SpringApplication.run(OrderApp.class, args);
 
-        bean.timingInsertInfo();
     }
 }

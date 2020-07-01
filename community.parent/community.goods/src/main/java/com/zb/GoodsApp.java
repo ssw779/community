@@ -1,10 +1,13 @@
 package com.zb;
 
+import com.zb.service.QgGoodsService;
+import com.zb.service.QgPreparatoryWorkService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * 商品启动类
@@ -16,6 +19,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @MapperScan("com.zb.mapper")
 public class GoodsApp {
     public static void main(String[] args) {
-        SpringApplication.run(GoodsApp.class,args);
+         SpringApplication.run(GoodsApp.class, args);
+
     }
 }

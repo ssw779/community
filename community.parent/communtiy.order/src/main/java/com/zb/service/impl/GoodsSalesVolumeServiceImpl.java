@@ -31,8 +31,9 @@ public class GoodsSalesVolumeServiceImpl implements GoodsSalesVolumeService {
      *
      * @return
      */
-    @Scheduled(cron = "0 */10 * * * ?")
+    //@Scheduled(cron = "0 */10 * * * ?")
     public int timingInsertInfo() {
+
         Goods goods = new Goods();
         //获取全部的商品信息
         List<Goods> goodsList = goodsFeignClient.findAllGoodsForTiming(goods);
@@ -50,24 +51,23 @@ public class GoodsSalesVolumeServiceImpl implements GoodsSalesVolumeService {
             }
         }
         return 1;
+
+
     }
 
     @Override
     public void disposeGoodsSalesVolume(Integer goodsId, Integer salesVolume) {
+
         System.out.println("进入操作方法");
         GoodsSalesVolume goodsSalesVolume = new GoodsSalesVolume();
         goodsSalesVolume.setGoodsId(goodsId);
         goodsSalesVolume.setSalesVolume(salesVolume);
-
         int count = goodsSalesVolumeMapper.getGoodsSalesVolume(goodsId);
         if (count > 0) {
             goodsSalesVolumeMapper.updateGoodsSalesVolume(goodsSalesVolume);
-
         } else {
             goodsSalesVolumeMapper.insertGoodsSalesVolume(goodsSalesVolume);
-
         }
-
 
     }
 }

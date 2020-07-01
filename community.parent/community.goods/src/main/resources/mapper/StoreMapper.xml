@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zb.mapper.StoreMapper">
 
+
+    <select id="elsGetStore" resultType="com.zb.pojo.Store">
+    select s.*,i.`imgUrl` as imgurl from `store` s, `image` i
+    where s.`id`=i.`targetId` and i.`type`=1 and i.`postion`=1
+
+
+    </select>
+
+
     <select id="getStoreById" resultType="com.zb.pojo.Store">
         select
         id as id,

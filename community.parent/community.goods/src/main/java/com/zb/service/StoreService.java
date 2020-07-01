@@ -10,6 +10,14 @@ public interface StoreService {
     /**
      * 来个定时任务，在零点修改商家评分
      */
+
+    /**
+     * 搜索引擎查找店铺
+     * @return
+     */
+    public List<Store>elsGetStore();
+
+
     /**
      * 多条件查询店铺，包括店铺图片
      *

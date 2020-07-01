@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /***
  *
  */
-public class Orders {
+public class Orders implements Serializable{
     //订单编号
     private Integer id;
     //用户编号

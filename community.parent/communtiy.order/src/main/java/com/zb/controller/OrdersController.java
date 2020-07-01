@@ -1,22 +1,34 @@
 package com.zb.controller;
 
-import com.zb.dto.Dto;
-import com.zb.feign.GoodsFeignClient;
-import com.zb.pojo.Goods;
-import com.zb.service.GoodsSalesVolumeService;
-import com.zb.service.impl.GoodsSalesVolumeServiceImpl;
+import com.zb.pojo.Orders;
+import com.zb.service.OrdersService;
+import com.zb.util.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequestMapping(value = "/orders")
 public class OrdersController {
 
-    @Autowired
-    private GoodsSalesVolumeServiceImpl goodsSalesVolumeService;
 
+    @Autowired
+    private OrdersService ordersService;
+
+    @PostMapping(value = "/insertOrders")
+    public int insertOrders( Orders orders) {
+        orders.setOrderNo(IdWorker.getId());
+        int row = ordersService.insertOrders(orders);
+        if (row > 0) {
+            //添加成功
+        }
+        //添加失败
+        return 0;
+
+    }
+
+    @PostMapping(value = "/updateOrders")
+    public int updateOrders(@RequestBody Orders orders) {
+        return ordersService.updateOrders(orders);
+    }
 }

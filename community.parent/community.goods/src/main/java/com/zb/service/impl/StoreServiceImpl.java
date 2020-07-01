@@ -29,6 +29,11 @@ public class StoreServiceImpl implements StoreService {
     private RedisTemplate<String, Object> redisTemplate;
 
     @Override
+    public List<Store> elsGetStore() {
+        return storeMapper.elsGetStore();
+    }
+
+    @Override
     public List<Store> getStoreListByVo(StoreVo storeVo) throws Exception {
         //redis的key 根据店铺的类型，图片显示的位置、店铺的分类父级编号、店铺分类子级编号来区分
         String key = "storeList" + storeVo.getImagePostion() + storeVo.getShopType() + storeVo.getShopParenType() + storeVo.getStoreType();
