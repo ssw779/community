@@ -6,10 +6,13 @@ import com.zb.config.OrderDelayRabbitConfig;
 import com.zb.feign.GoodsFeignClient;
 import com.zb.feign.TemGoodsFeignClient;
 import com.zb.mapper.OrdersMapper;
+import com.zb.pojo.CommunityTask;
 import com.zb.pojo.Orders;
 import com.zb.pojo.QgGoods;
 import com.zb.pojo.TempGoods;
+import com.zb.service.CommunityTaskService;
 import com.zb.service.OrdersService;
+import com.zb.util.IdWorker;
 import com.zb.util.RedisUtil;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -33,6 +36,8 @@ public class OrdersServiceImpl implements OrdersService {
     private TemGoodsFeignClient temGoodsFeignClient;
     @Autowired
     private RedisUtil redisUtils;
+    @Autowired
+    private CommunityTaskService communityTaskService;
 
 
     @Override
@@ -114,12 +119,34 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public int updateOrders(Orders orders) {
-        return ordersMapper.updateOrders(orders);
+        int count = ordersMapper.updateOrders(orders);
+        if (count > 0) {
+            //往临时任务表添加信息
+            CommunityTask communityTask = new CommunityTask();
+            communityTask.setId(IdWorker.getId());
+            communityTask.setMqExchange("ex_learning_addchoosecourse");
+            communityTask.setMqRoutingkey("addchoosecourse");
+            communityTask.setStatus(1 + "");
+            communityTask.setTaskType(1 + "");
+            communityTask.setVersion(1);
+            Map<String, Object> requestBody = new HashMap<>();
+            //用户编号
+            requestBody.put("userId", orders.getUserId());
+            //订单编号
+            requestBody.put("goodsId", orders.getOrderNo());
+            requestBody.put("price", orders.getPayAmount());
+            requestBody.put("createtTime", orders.getCreateTime());
+            requestBody.put("finshTime", orders.getFinshTime());
+            communityTask.setRequestBody(JSON.toJSONString(requestBody));
+            communityTaskService.insertTask(communityTask);
+        }
+
+        return count;
     }
 
 
     @Override
-    public Orders getOrdersById(String orderNo){
+    public Orders getOrdersById(String orderNo) {
 
         return ordersMapper.getOrdersById(orderNo);
     }

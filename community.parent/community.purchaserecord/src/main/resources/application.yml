@@ -1,0 +1,9 @@
+server:
+  port: 9004
+spring:
+  application:
+    name: purchaserecordServer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:8001/eureka/

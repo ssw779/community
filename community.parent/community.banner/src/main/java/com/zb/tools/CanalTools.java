@@ -111,6 +111,10 @@ public class CanalTools {
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * 修改canal轮询
+     * @param columns
+     */
     private void updateRedisData(List<Column> columns) {
         Set<Integer> categoryId = new HashSet<>();
 
