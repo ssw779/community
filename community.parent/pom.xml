@@ -18,6 +18,8 @@
         <module>communtiy.banner.api</module>
         <module>communtiy.order.api</module>
         <module>communtiy.order</module>
+        <module>community.purchaserecord.api</module>
+        <module>community.purchaserecord</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

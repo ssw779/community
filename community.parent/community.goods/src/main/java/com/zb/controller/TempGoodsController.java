@@ -14,12 +14,22 @@ public class TempGoodsController {
     @Autowired
     private TempGoodsService tempGoodsService;
 
+    /**
+     * 修改临时库存表
+     * @param tempGoods
+     * @return
+     */
     @PostMapping(value = "/updateTempGoods")
     public int updateTempGoods(@RequestBody TempGoods tempGoods) {
 
         return tempGoodsService.updateTempGoods(tempGoods);
     }
 
+    /**
+     * 获取临时库存表的信息
+     * @param tempGoods
+     * @return
+     */
     @PostMapping(value = "/getTempGoods")
     public TempGoods getTempGoods(@RequestBody TempGoods tempGoods) {
 

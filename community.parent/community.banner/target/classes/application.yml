@@ -4,7 +4,7 @@ server:
   port: 9002
 spring:
   application:
-    name: contentServer
+    name: bannerServer
 eureka:
   client:
     service-url:

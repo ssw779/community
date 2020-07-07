@@ -16,7 +16,7 @@ public interface OrdersService {
 
     /**
      * 添加订单信息
-     *
+     * 同时发送消息队列
      * @param orders
      * @return
      */
