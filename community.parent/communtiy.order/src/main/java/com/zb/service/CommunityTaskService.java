@@ -1,7 +1,6 @@
 package com.zb.service;
 
 import com.zb.pojo.CommunityTask;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public interface CommunityTaskService {
      * @param id
      * @return
      */
-    public int delTask(Integer id);
+    public int delTask(String id);
 
 
     /**
@@ -31,7 +30,7 @@ public interface CommunityTaskService {
      * @param id
      * @return
      */
-    public int updateTaskTime(Integer id);
+    public int updateTaskTime(String id);
 
     /**
      * 寻找一分钟以前的任务
@@ -44,7 +43,7 @@ public interface CommunityTaskService {
      * @param id
      * @return
      */
-    public CommunityTask getCommunityTaskById(Integer id);
+    public CommunityTask getCommunityTaskById(String id);
 
 
     /**临时任务表

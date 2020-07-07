@@ -16,7 +16,7 @@ public class QgGoodsController {
      * 用户抢购方法
      * 只是添加一条预定信息，并没有往订单里添加数据
      *
-     * @param goodsId
+     * @param goodsId 商品的编号 不是抢购的编号
      * @param token
      * @return
      */

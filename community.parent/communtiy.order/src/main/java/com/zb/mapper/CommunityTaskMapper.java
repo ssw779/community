@@ -10,7 +10,7 @@ import java.util.Map;
 @Mapper
 public interface CommunityTaskMapper {
 
-	public CommunityTask getCommunityTaskById(@Param(value = "id") Long id);
+	public CommunityTask getCommunityTaskById(@Param(value = "id") String id);
 
 	public Integer insertCommunityTask(CommunityTask communityTask);
 
@@ -35,7 +35,7 @@ public interface CommunityTaskMapper {
 	 * @param id
 	 * @return
 	 */
-	public int updateTaskTime(@Param("id") Integer id);
+	public int updateTaskTime(@Param("id") String id);
 
 	/**
 	 * 获取任务表一分钟以前的数据
@@ -55,5 +55,5 @@ public interface CommunityTaskMapper {
 	 * @param id
 	 * @return
 	 */
-	public int delTask(@Param("id") Integer id);
+	public int delTask(@Param("id") String id);
 }

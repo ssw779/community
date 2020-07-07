@@ -106,7 +106,7 @@ public class QgGoodsServiceImpl implements QgGoodsService {
     public void monitorMq(Map<String, Object> param, Message message, Channel channel) {
         Integer goodsId = Integer.parseInt(param.get("goodsId").toString());
         String token = param.get("token").toString();
-        System.out.println("roomId:" + goodsId + "\t" + "token:" + token);
+        System.out.println("goodsId:" + goodsId + "\t" + "token:" + token);
         //根据token获取用户的信息，如果存在就继续
         /**
          *  User user = userFeignClient.getUserByTokenFromRedis(token);
@@ -122,6 +122,12 @@ public class QgGoodsServiceImpl implements QgGoodsService {
                 Thread.sleep(20);
 
             }
+            //检查有没有此商品
+            String qgGoodsKey = "qgGoods" + goodsId;
+            if (!redisUtils.hasKey(qgGoodsKey)) {
+                return;
+            }
+
             //检查库存，检查的是redis里的库存
             System.out.println("检查库存，检查的是redis里的库存");
             int stock = qgPreparatoryWorkService.checkGoodsInventory(goodsId);

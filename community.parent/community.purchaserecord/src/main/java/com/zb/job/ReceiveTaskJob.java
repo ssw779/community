@@ -28,7 +28,7 @@ public class ReceiveTaskJob {
      */
     @RabbitListener(queues = RabbitMQConfig.XC_LEARNING_ADDCHOOSECOURSE)
     public void receive(CommunityTask communityTask, Message message, Channel channel) {
-        System.out.println("选择商品模块接收消息队列中的数据");
+        System.out.println("选择商品模块接收到消息队列中的数据");
         //存进itrip_purchaserecord_db的记录表里去
         //获取任务表里requestBody里面的信息，应该实一个完整购买记录对应：PurchaseRecord
         //添加成功以后，发送一个消息队列给orderServer，删除对应的记录
