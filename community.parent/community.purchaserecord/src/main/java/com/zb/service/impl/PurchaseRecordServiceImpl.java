@@ -32,8 +32,8 @@ public class PurchaseRecordServiceImpl implements PurchaseRecordService {
             //从communityTask的requestBody取出订单的完整信息
             Map<String, Object> param = new HashMap<>();
             CommunityPurchaserecord purchaserecord = JSON.parseObject(communityTask.getRequestBody(), CommunityPurchaserecord.class);
-            param.put("goodsId", purchaserecord.getUserId());
-            param.put("userId", purchaserecord.getGoodsId());
+            param.put("goodsId", purchaserecord.getGoodsId());
+            param.put("userId", purchaserecord.getUserId());
             //先判断这个表里有没有数据，有就修改，没有就添加
             List<CommunityPurchaserecord> purchaserecordList = communityPurchaserecordMapper.getCommunityPurchaserecordListByMap(param);
             CommunityPurchaserecord communityPurchaserecord = null;
@@ -41,7 +41,7 @@ public class PurchaseRecordServiceImpl implements PurchaseRecordService {
                 communityPurchaserecord = purchaserecordList.get(0);
             }
             //之前没有购买记录
-            if (communityPurchaserecord != null) {
+            if (communityPurchaserecord == null) {
                 communityPurchaserecord = new CommunityPurchaserecord();
                 //添加
                 communityPurchaserecord.setId(IdWorker.getId());

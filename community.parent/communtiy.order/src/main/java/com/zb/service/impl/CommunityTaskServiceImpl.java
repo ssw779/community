@@ -21,12 +21,12 @@ public class CommunityTaskServiceImpl implements CommunityTaskService {
     }
 
     @Override
-    public int delTask(Integer id) {
+    public int delTask(String id) {
         return communityTaskMapper.delTask(id);
     }
 
     @Override
-    public int updateTaskTime(Integer id) {
+    public int updateTaskTime(String id) {
         return communityTaskMapper.updateTaskTime(id);
     }
 
@@ -36,8 +36,8 @@ public class CommunityTaskServiceImpl implements CommunityTaskService {
     }
 
     @Override
-    public CommunityTask getCommunityTaskById(Integer id) {
-        return communityTaskMapper.getCommunityTaskById(Long.parseLong(id.toString()));
+    public CommunityTask getCommunityTaskById(String id) {
+        return communityTaskMapper.getCommunityTaskById(id);
     }
 
     @Override

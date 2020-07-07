@@ -138,7 +138,7 @@ public class PayController {
         //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
         boolean verify_result = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, "RSA2");
 
-        if (verify_result) {//验证成功
+        if (!verify_result) {//验证成功
 
             //请在这里加上商户的业务逻辑程序代码
             //修改订单状态:根据订单号修改状态,添加交易编号

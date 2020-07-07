@@ -10,18 +10,16 @@ import java.util.Map;
 @Mapper
 public interface CommunityTaskHisMapper {
 
-	public CommunityTaskHis getCommunityTaskHisById(@Param(value = "id") Long id)throws Exception;
+	public CommunityTaskHis getCommunityTaskHisById(@Param(value = "id") Long id);
 
-	public List<CommunityTaskHis>	getCommunityTaskHisListByMap(Map<String,Object> param)throws Exception;
+	public List<CommunityTaskHis>	getCommunityTaskHisListByMap(Map<String,Object> param);
 
-	public Integer getCommunityTaskHisCountByMap(Map<String,Object> param)throws Exception;
 
-	public Integer insertCommunityTaskHis(CommunityTaskHis communityTaskHis)throws Exception;
 
-	public Integer updateCommunityTaskHis(CommunityTaskHis communityTaskHis)throws Exception;
+	public Integer insertCommunityTaskHis(CommunityTaskHis communityTaskHis);
 
-	public Integer deleteCommunityTaskHisById(@Param(value = "id") Long id)throws Exception;
+	public Integer updateCommunityTaskHis(CommunityTaskHis communityTaskHis);
 
-	public Integer batchDeleteCommunityTaskHis(Map<String,List<String>> params);
+
 
 }
